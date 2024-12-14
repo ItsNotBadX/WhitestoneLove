@@ -5,20 +5,18 @@
     <title>Whitestone Love</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Modal styles */
         .modal {
-            display: none; /* Hidden by default */
+            display: none;
             position: fixed;
-            z-index: 1; /* Sit on top */
+            z-index: 1;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
         }
 
-        /* Modal Content */
         .modal-content {
             background-color: #fefefe;
             margin: 15% auto;
@@ -29,7 +27,6 @@
             box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
         }
 
-        /* Close Button */
         .close {
             color: #aaa;
             float: right;
@@ -77,7 +74,6 @@
         <label for="message">How can we contact you? (optional)</label>
         <textarea id="message" name="message"></textarea>
     
-        <!-- Add Terms and Conditions -->
         <p class="legal-text">
             By submitting this request, you agree to our <a href="#" id="terms-link">Terms and Conditions</a> and acknowledge that Whitestone Love is not responsible for any outcomes related to your request.
         </p>
@@ -98,7 +94,6 @@
         <p>Contact Us: support@whitestonelove.com</p>
     </footer>
 
-    <!-- The Modal -->
     <div id="terms-modal" class="modal">
         <div class="modal-content">
             <span class="close" id="close-modal">&times;</span>
@@ -120,12 +115,10 @@
         </div>
     </div>
 
-    <!-- Include Firebase SDK as Modules -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
         import { getFirestore, collection, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
     
-        // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyA0-JLmTT4Rrtdue007CX-yxl4YXetWqA8",
             authDomain: "project-486a8.firebaseapp.com",
@@ -136,43 +129,37 @@
             measurementId: "G-B83X0S4X7Z"
         };
     
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
     
-        // Handle form submission
         document.getElementById('data-form').addEventListener('submit', async (e) => {
             e.preventDefault();
     
-            // Collect all form data
             const name = document.getElementById('name').value;
             const sinner = document.getElementById('sinner').value;
             const genitalia = document.getElementById('genitalia').value;
             const tags = document.getElementById('tags').value;
             const message = document.getElementById('message').value;
     
-            // Create an object to store the form data
             const formData = {
                 name: name,
                 sinner: sinner,
                 genitalia: genitalia,
                 tags: tags,
                 message: message,
-                timestamp: Timestamp.fromDate(new Date())  // Include timestamp for when submission was made
+                timestamp: Timestamp.fromDate(new Date())
             };
     
-            // Save to Firestore
             try {
                 await addDoc(collection(db, 'submissions'), formData);
-                document.getElementById('flashyModal').style.display = 'block'; // Show flashy modal
-                e.target.reset();  // Reset form after successful submission
+                document.getElementById('flashyModal').style.display = 'block';
+                e.target.reset();
             } catch (error) {
                 console.error('Error adding document: ', error);
                 alert('Oops, something went wrong. Try again later!');
             }
         });
 
-        // Close modal when the button is clicked
         document.getElementById('closeModal').addEventListener('click', () => {
             document.getElementById('flashyModal').style.display = 'none';
         });
