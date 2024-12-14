@@ -1,1 +1,181 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whitestone Love</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+        }
 
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .legal-text {
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Whitestone Love!</h1>
+
+    <p class="flashy-text">Ever wondered what it would be like to date a sinner? Curious about that "magical" charm they have? Well, worry no more! For a small (and totally reasonable) fee, you can book a day with your favorite MBCC sinner. Whitestone Love is here to make your wildest dreams come true! Simply fill out the form below, and we’ll get in touch to make it happen!</p>
+
+    <p class="flashy-text">PS: At this time, we only accept women. Thank you for your understanding!</p>
+
+    <form id="data-form">
+        <label for="name">What's your name?</label>
+        <input type="text" id="name" name="name" required placeholder="We need to know who you are!">
+    
+        <label for="sinner">Which sinner(s) are you interested in?</label>
+        <input type="text" id="sinner" name="sinner" required placeholder="We might accept non sinners!">
+    
+        <label for="genitalia">What type of...attributes would you prefer?</label>
+        <select id="genitalia" name="genitalia" required>
+            <option value="" disabled selected>Select their attributes...</option>
+            <option value="long_and_hard">Something long and hard</option>
+            <option value="soft_and_wet">Something soft and wet</option>
+        </select>
+
+        <label for="tags">What do you want them to do with you? (Details, please!)</label>
+        <textarea name="tags" id="tags" required placeholder="The more details, the better!"></textarea>
+
+        <label for="message">How can we contact you? (optional)</label>
+        <textarea id="message" name="message"></textarea>
+    
+        <!-- Add Terms and Conditions -->
+        <p class="legal-text">
+            By submitting this request, you agree to our <a href="#" id="terms-link">Terms and Conditions</a> and acknowledge that Whitestone Love is not responsible for any outcomes related to your request. All activities are fictional and for entertainment purposes only.
+        </p>
+        
+        <label for="agree">
+            <input type="checkbox" id="agree" name="agree" required> I agree to the Terms and Conditions
+        </label>
+
+        <button type="submit">Submit Your Request</button>
+    </form>
+
+    <p class="legal-text">
+        <a href="#privacy-policy" target="_blank">Privacy Policy</a>: We value your privacy. All information provided will be kept confidential and will only be used for the purposes of your request. We do not share your data with third parties.
+    </p>
+
+    <footer>
+        <p>&copy; 2024 Whitestone Love, All Rights Reserved.</p>
+        <p>Contact Us: support@whitestonelove.com</p>
+    </footer>
+
+    <!-- The Modal -->
+    <div id="terms-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-modal">&times;</span>
+            <h2>Terms and Conditions</h2>
+            <p>By accessing or using Whitestone Love services, you agree to comply with the following terms...</p>
+            <p><strong>1. Usage:</strong> This service is purely fictional and for entertainment purposes only. All interactions are simulated.</p>
+            <p><strong>2. Age Requirement:</strong> You must be of legal age to participate in this service.</p>
+            <p><strong>3. Disclaimer:</strong> Whitestone Love is not responsible for any emotional or physical consequences of interactions.</p>
+            <p><strong>4. Privacy:</strong> Your data is confidential and will be used solely for service purposes. For more details, view our <a href="#privacy-policy" target="_blank">Privacy Policy</a>.</p>
+            <p>By submitting your request, you acknowledge that you have read and agree to these terms.</p>
+        </div>
+    </div>
+
+    <div id="flashyModal" class="modal">
+        <div class="modal-content">
+            <h2 class="flashy-text">Your request has been submitted successfully!</h2>
+            <p class="flashy-text">We’ll get back to you soon. Stay tuned!</p>
+            <button id="closeModal">Close</button>
+        </div>
+    </div>
+
+    <!-- Include Firebase SDK as Modules -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
+    
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA0-JLmTT4Rrtdue007CX-yxl4YXetWqA8",
+            authDomain: "project-486a8.firebaseapp.com",
+            projectId: "project-486a8",
+            storageBucket: "project-486a8.firebasestorage.app",
+            messagingSenderId: "726031311731",
+            appId: "1:726031311731:web:b5e1411a73419c15ba9b06",
+            measurementId: "G-B83X0S4X7Z"
+        };
+    
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+    
+        // Handle form submission
+        document.getElementById('data-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+    
+            // Collect all form data
+            const name = document.getElementById('name').value;
+            const sinner = document.getElementById('sinner').value;
+            const genitalia = document.getElementById('genitalia').value;
+            const tags = document.getElementById('tags').value;
+            const message = document.getElementById('message').value;
+    
+            // Create an object to store the form data
+            const formData = {
+                name: name,
+                sinner: sinner,
+                genitalia: genitalia,
+                tags: tags,
+                message: message,
+                timestamp: Timestamp.fromDate(new Date())  // Include timestamp for when submission was made
+            };
+    
+            // Save to Firestore
+            try {
+                await addDoc(collection(db, 'submissions'), formData);
+                document.getElementById('flashyModal').style.display = 'block'; // Show flashy modal
+                e.target.reset();  // Reset form after successful submission
+            } catch (error) {
+                console.error('Error adding document: ', error);
+                alert('Oops, something went wrong. Try again later!');
+            }
+        });
+
+        // Close modal when the button is clicked
+        document.getElementById('closeModal').addEventListener('click', () => {
+            document.getElementById('flashyModal').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

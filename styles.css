@@ -1,0 +1,251 @@
+/* General Body Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Heading Styles */
+h1 {
+    color: #FF6347; /* Tomato color */
+    font-size: 3em;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 20px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Container */
+form {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 600px;
+    margin: 30px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 3px solid #FF6347;
+    background-image: linear-gradient(145deg, #ffcccb, #ff7f7f);
+}
+
+/* Input & Textarea Fields */
+input[type="text"], textarea, select {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 2px solid #FF6347;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus, textarea:focus, select:focus {
+    border-color: #ff4500;
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 69, 0, 0.5);
+}
+
+/* Button Styles */
+button {
+    background-color: #FF6347;
+    color: white;
+    padding: 20px 30px;
+    font-size: 1.5em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #ff4500;
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(1);
+}
+
+/* Form Labels */
+label {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    text-align: left;
+    margin: 10px 0 5px;
+}
+
+/* Paragraphs & Instructions */
+p {
+    font-size: 1.1em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+/* Fancy Border Around the Form */
+form {
+    border: 5px dashed #FF6347;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Add fun, scammy effects like flashing text */
+.flashy-text {
+    color: #FFD700;
+    font-size: 2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    animation: flash 1s infinite alternate;
+}
+
+@keyframes flash {
+    0% {
+        color: #FFD700;
+    }
+    100% {
+        color: #FF4500;
+    }
+}
+
+/* Media Queries for Responsiveness */
+
+/* For devices up to 768px (Tablets and small laptops) */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5em; /* Smaller header on tablets */
+    }
+
+    form {
+        padding: 20px; /* Less padding on smaller screens */
+        max-width: 90%; /* Allow form to take more space */
+    }
+
+    input[type="text"], textarea, select {
+        padding: 12px; /* Smaller padding on smaller devices */
+        font-size: 1em;
+    }
+
+    button {
+        font-size: 1.3em; /* Smaller button text */
+        padding: 15px 20px; /* Adjust button size */
+    }
+}
+
+/* For devices up to 480px (Mobile phones) */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2em; /* Smaller header on phones */
+    }
+
+    form {
+        padding: 15px; /* Less padding on mobile */
+        max-width: 100%; /* Form takes full width */
+    }
+
+    input[type="text"], textarea, select {
+        padding: 10px; /* Further reduce padding for smaller screens */
+        font-size: 0.9em; /* Smaller text size */
+    }
+
+    button {
+        font-size: 1.2em; /* Smaller button text */
+        padding: 12px 18px; /* Adjust button size */
+    }
+
+    .flashy-text {
+        font-size: 1.5em; /* Reduce font size for small screens */
+    }
+}
+/* General Body Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Heading Styles */
+h1 {
+    color: #FF6347; /* Tomato color */
+    font-size: 3em;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 20px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Container */
+form {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 600px;
+    margin: 30px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 3px solid #FF6347;
+    background-image: linear-gradient(145deg, #ffcccb, #ff7f7f);
+}
+
+/* Input & Textarea Fields */
+input[type="text"], textarea, select {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 2px solid #FF6347;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+/* Flashy Modal Styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed position */
+    z-index: 1; /* Stay on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: flashy 2s ease-out;
+}
+
+@keyframes flashy {
+    0% {
+        transform: scale(1);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+button {
+    background-color: #FF6347;
+    color: white;
+    padding: 15px 20px;
+    font-size: 1.5em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ff4500;
+}
