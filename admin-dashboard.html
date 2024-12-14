@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <style>
+        /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 2rem;
+    text-align: center;
+    color: #333;
+}
+
+button {
+    background-color: #ff6347; /* Tomato color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #e5533e; /* Darker tomato color */
+}
+
+#submission-list {
+    margin-top: 30px;
+}
+
+.submission-item {
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    border-left: 5px solid #ff6347; /* A subtle color accent */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.submission-item + .submission-item {
+    margin-top: 30px; /* Add extra space between items */
+}
+
+/* Add a dividing line between submissions */
+.submission-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #ddd;
+}
+
+.submission-item h3 {
+    font-size: 1.5rem;
+    color: #ff6347;
+}
+
+.submission-item p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.submission-item strong {
+    font-weight: bold;
+}
+
+/* Optional: Style the submission item content */
+.submission-item p {
+    margin: 5px 0;
+}
+
+/* Adding hover effect for submission items */
+.submission-item:hover {
+    background-color: #f2f2f2;
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+    </style>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <p>Welcome, Admin! Below are the submissions:</p>
+        
+        <div id="submission-list">
+            <!-- Submissions will be displayed here dynamically -->
+        </div>
+
+        <button id="logout-button">Logout</button>
+    </div>
+
+    <script type="module">
+        import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-auth.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
+        
+        const firebaseConfig = {
+  apiKey: "AIzaSyA0-JLmTT4Rrtdue007CX-yxl4YXetWqA8",
+  authDomain: "project-486a8.firebaseapp.com",
+  projectId: "project-486a8",
+  storageBucket: "project-486a8.firebasestorage.app",
+  messagingSenderId: "726031311731",
+  appId: "1:726031311731:web:b5e1411a73419c15ba9b06",
+  measurementId: "G-B83X0S4X7Z"
+};
+        
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Fetch all submissions from Firestore
+        async function loadSubmissions() {
+            const submissionsRef = collection(db, 'submissions');
+            const querySnapshot = await getDocs(submissionsRef);
+            const submissionList = document.getElementById('submission-list');
+            submissionList.innerHTML = '';  // Clear the list
+
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const submissionItem = document.createElement('div');
+                submissionItem.classList.add('submission-item');
+
+                submissionItem.innerHTML = `
+                    <h3>Submission from: ${data.name}</h3>
+                    <p><strong>Sinner(s) of interest:</strong> ${data.sinner}</p>
+                    <p><strong>Attributes preferred:</strong> ${data.genitalia}</p>
+                    <p><strong>What they'd like done:</strong> ${data.tags}</p>
+                    <p><strong>Additional message:</strong> ${data.message || 'No additional message'}</p>
+                    <p><strong>Submitted on:</strong> ${data.timestamp.toDate().toLocaleString()}</p>
+                `;
+                
+                submissionList.appendChild(submissionItem);
+            });
+        }
+
+        loadSubmissions();
+
+        // Logout functionality
+        document.getElementById('logout-button').addEventListener('click', async () => {
+            await signOut(auth);
+            window.location.href = 'login.html';  // Redirect to the login page after logout
+        });
+    </script>
+</body>
+</html>

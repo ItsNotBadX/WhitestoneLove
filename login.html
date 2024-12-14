@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+</head>
+<body>
+    <h1>Admin Login</h1>
+    <form id="login-form">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required placeholder="Enter your email">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required placeholder="Enter your password">
+        <button type="submit">Login</button>
+    </form>
+
+    <script type="module">
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-auth.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
+        
+        const firebaseConfig = {
+  apiKey: "AIzaSyA0-JLmTT4Rrtdue007CX-yxl4YXetWqA8",
+  authDomain: "project-486a8.firebaseapp.com",
+  projectId: "project-486a8",
+  storageBucket: "project-486a8.firebasestorage.app",
+  messagingSenderId: "726031311731",
+  appId: "1:726031311731:web:b5e1411a73419c15ba9b06",
+  measurementId: "G-B83X0S4X7Z"
+};
+        
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                window.location.href = 'admin-dashboard.html';
+            } catch (error) {
+                console.error('Login failed: ', error.message);
+                alert('Login failed! Please check your credentials and try again.');
+            }
+        });
+    </script>
+</body>
+</html>
